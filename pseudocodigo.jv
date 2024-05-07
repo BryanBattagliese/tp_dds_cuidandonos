@@ -1,0 +1,36 @@
+// "Pseudocodigo" del calculo de demora aproximado:
+
+public class Viaje {
+	
+	private List<Parada> paradas;
+	private ServicioDistanceMatrixAPI = servicioDistanceMatrixAPI.getInstancia();	
+
+	---------------------------------------------------------------------------------------
+
+	public float calcularDemoraTotalAprox(){
+		
+		float demoraTotal = 0.0f;	
+
+		for (int i = 0; i < paradas.size() - 1; i++){
+           	  Parada paradaActual    = paradas.get(i);
+           	  Parada siguienteParada = paradas.get(i + 1);
+
+		  float distanciaEntreParadas = 
+		    servicioDistanceMatrixAPI
+			.calcularDistancia(paradaActual, siguienteParada);
+			
+		  float demoraDelTramo = calcularDemoraTramo(distanciaEntreParadas);
+	
+
+		if(siguienteParada.duracionEstimada() > 0){
+		   demoraTotal += demoraDelTramo + siguienteParada.duracionEstimada();
+		}
+
+		else {
+		   demoraTotal += demoraDelTramo;
+		}
+		
+		return demoraTotal;
+
+	}
+}
